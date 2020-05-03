@@ -39,7 +39,7 @@ libraryDependencies ++= Seq(
 addCompilerPlugin("org.typelevel" % "kind-projector_2.13.1" % "0.11.0")
 
 assemblyJarName in assembly := s"app.jar"
-mainClass in assembly := Some("org.parseq.parserservice.Main")
+mainClass in assembly := Some("org.parseq.mathservice.Main")
 
 //mainClass in Compile := Some("org.parseq.mathservice.Main")
 
