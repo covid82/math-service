@@ -54,7 +54,7 @@ object Main extends IOApp {
     import io.circe.generic.auto._
     import io.circe.syntax._
     import org.http4s.circe.CirceEntityCodec._
-    spannedClient.expect(POST(expr.asJson, uri"http://math-service:9090/api/calculate"))(implicitly[EntityDecoder[F, String]])
+    spannedClient.expect(POST(expr.asJson, uri"http://math-service:8082/api/calculate"))(implicitly[EntityDecoder[F, String]])
   }
 
   def api[F[_] : ConcurrentEffect : Parallel](ep: EntryPoint[F], client: Client[F]): Kleisli[OptionT[F, *], Request[F], Response[F]] = {
