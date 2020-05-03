@@ -77,22 +77,19 @@ object Main extends IOApp {
 
         for {
           expr <- req.as[Expr]
-          result: F[String] = {
+          response = {
             import cats.syntax.applicative._
             expr match {
               case Rand(max) =>
                 Random.nextInt(max).toString.pure
               case Add(l, r) =>
                 import cats.syntax.parallel._
-                val q = (calculate(l), calculate(r)).parTupled.map { case (a, b) =>
+                (calculate(l), calculate(r)).parTupled.map { case (a, b) =>
                   (a.toInt + b.toInt).toString
                 }
-                q
             }
-          }
-          s <- result
-          x <- Ok(s)
-        } yield x
+          }.flatMap(Ok(_))
+        } yield response
       }
     }
   }
