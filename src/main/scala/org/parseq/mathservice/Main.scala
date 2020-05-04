@@ -77,7 +77,7 @@ object Main extends IOApp {
 
         for {
           expr <- req.as[Expr]
-          response = {
+          result <- {
             import cats.syntax.applicative._
             expr match {
               case Rand(max) =>
@@ -89,7 +89,7 @@ object Main extends IOApp {
                 }
             }
           }.flatMap(Ok(_))
-        } yield response
+        } yield result
       }
     }
   }
