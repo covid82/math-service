@@ -61,7 +61,7 @@ object Main extends IOApp {
     object dsl extends Http4sDsl[F]
     import dsl._
     HttpRoutes.of[F] {
-      case GET -> Root / "health" => Ok("OkOk")
+      case GET -> Root / "health" => Ok("Ok")
       case req@GET -> Root / "random" / IntVar(limit) => span(s"random($limit)")(req, ep).use { _ =>
         Ok(Random.nextInt(limit).toString)
       }
